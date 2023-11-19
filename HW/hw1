@@ -5,7 +5,7 @@ void Sorting(int *pArr, int size);
 int main(void)
 {
     int b[]= {20,34,12,24,54,91,9,40,81,10};
-    int max,min,sorting,i,temp;
+    int max,min,i,temp;
 
     max = Max(b,10);
     printf("최대값: %d\n", max);
