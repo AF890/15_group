@@ -1,0 +1,249 @@
+#include <stdio.h>
+#include <string.h>
+#include <locale.h>
+
+struct books {
+    char title[20];
+    char author[20];
+    char press[20];
+    int page;
+    int price;
+    int borrow; // 조건연산자. 0: 대출 가능, 1: 대출 중
+};
+
+int main() {
+    setlocale(LC_NUMERIC, "");
+
+    struct books st1 = {"Truth", "John", "Century", 300, 20000, 0};
+    struct books st2 = {"Love", "Paul", "Goods", 200, 15000, 0};
+    struct books st3 = {"Joy", "James", "Cookie", 250, 18000, 0};
+    struct books st4 = {"Thanks", "Mark", "Saejong", 240, 21000, 0};
+    struct books st5 = {"God", "Johnson", "Jungjo", 450, 35000, 0};
+
+    int option;
+    char input[20];
+
+    while (1) {
+        printf("[1] 도서목록 [2] 검색 [3] 대출 [4] 반납 [5] 종료\n");
+        printf("메뉴를 선택하세요: ");
+
+        if (scanf("%s", input) != 1)
+            continue;
+        
+        if (sscanf(input, "%d", &option) != 1) 
+        {
+            printf("숫자를 입력해주세요.\n");
+            continue;
+        }
+
+        switch (option) {
+            case 1:
+                printf("도서목록\n");
+                printf("%s %s %s %s %s \n", "Title", "Authors", "Press", "Page", "Price");
+                printf("------------------------------------------------\n");
+                printf("%s %s %s %d %'d \n", st1.title, st1.author, st1.press, st1.page, st1.price);
+                printf("%s %s %s %d %'d \n", st2.title, st2.author, st2.press, st2.page, st2.price);
+                printf("%s %s %s %d %'d \n", st3.title, st3.author, st3.press, st3.page, st3.price);
+                printf("%s %s %s %d %'d \n", st4.title, st4.author, st4.press, st4.page, st4.price);
+                printf("%s %s %s %d %'d \n", st5.title, st5.author, st5.press, st5.page, st5.price);
+                break;
+
+            case 2:
+            {
+                char search[20];
+                printf("검색할 도서를 선택하세요: ");
+                scanf("%s", search);
+                //strcasecmp는 맥에서만 호환. ms의 경우 _stricmp 또는 _stricmp_l 사용.
+                printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                printf("------------------------------------------------\n");
+
+                if (strcasecmp(search, st1.title) == 0) 
+                {
+                    printf("%s %s %s %d %'d %s\n", st1.title, st1.author, st1.press, st1.page, st1.price, st1.borrow ? "borrowing" : "available");
+                } 
+                else if (strcasecmp(search, st2.title) == 0) 
+                {
+                    printf("%s %s %s %d %'d %s\n", st2.title, st2.author, st2.press, st2.page, st2.price, st2.borrow ? "borrowing" : "available");
+                } 
+                else if (strcasecmp(search, st3.title) == 0) 
+                {
+                    printf("%s %s %s %d %'d %s\n", st3.title, st3.author, st3.press, st3.page, st3.price, st3.borrow ? "borrowing" : "available");
+                } 
+                else if (strcasecmp(search, st4.title) == 0) 
+                {
+                    printf("%s %s %s %d %'d %s\n", st4.title, st4.author, st4.press, st4.page, st4.price, st4.borrow ? "borrowing" : "available");
+                } 
+                else if (strcasecmp(search, st5.title) == 0) 
+                {
+                    printf("%s %s %s %d %'d %s\n", st5.title, st5.author, st5.press, st5.page, st5.price, st5.borrow ? "borrowing" : "available");
+                } 
+                else {
+                    printf("일치하는 도서가 없습니다.\n");
+                }
+                break;
+            }
+            case 3:
+            {
+                char Borrow[20];
+                printf("대출할 도서를 선택하세요: ");
+                scanf("%s", Borrow);
+
+                if (strcasecmp(Borrow, st1.title) == 0) 
+                {
+                    if (st1.borrow == 0) {
+                        st1.borrow = 1;
+                        printf("대출 되었습니다.\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st1.title, st1.author, st1.press, st1.page, st1.price, st1.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 중이라 대출 할 수 없습니다\n");
+                    }
+                } 
+                else if (strcasecmp(Borrow, st2.title) == 0) 
+                {
+                    if (st2.borrow == 0) {
+                        st2.borrow = 1;
+                        printf("대출 되었습니다.\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st2.title, st2.author, st2.press, st2.page, st2.price, st2.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 중이라 대출 할 수 없습니다\n");
+                    }
+                } 
+                else if (strcasecmp(Borrow, st3.title) == 0) 
+                {
+                    if (st3.borrow == 0) {
+                        st3.borrow = 1;
+                        printf("대출 되었습니다.\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st3.title, st3.author, st3.press, st3.page, st3.price, st3.borrow ? "borrowing" : "available");
+
+                    } 
+                    else {
+                        printf("대출 중이라 대출 할 수 없습니다\n");
+                    }
+                } 
+                else if (strcasecmp(Borrow, st4.title) == 0) 
+                {
+                    if (st4.borrow == 0) {
+                        st4.borrow = 1;
+                        printf("대출 되었습니다.\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st4.title, st4.author, st4.press, st4.page, st4.price, st4.borrow ? "borrowing" : "available");
+
+                    } 
+                    else {
+                        printf("대출 중이라 대출 할 수 없습니다\n");
+                    }
+                } 
+                else if (strcasecmp(Borrow, st5.title) == 0) 
+                {
+                    if (st5.borrow == 0) {
+                        st5.borrow = 1;
+                        printf("대출 되었습니다.\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st5.title, st5.author, st5.press, st5.page, st5.price, st5.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 중이라 대출 할 수 없습니다\n");
+                    }
+                } 
+                else {
+                    printf("보유하지 않은 도서입니다.\n");
+                }
+                break;
+            }
+            case 4:
+                {
+                char Return[20];
+                printf("반납할 도서를 선택하세요: ");
+                scanf("%s", Return);
+
+                if (strcasecmp(Return, st1.title) == 0) 
+                {
+                    if (st1.borrow == 1) {
+                        st1.borrow = 0;
+                        printf("책이 반납 되었습니다\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st1.title, st1.author, st1.press, st1.page, st1.price, st1.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 되지 않은 책입니다\n");
+                    }
+                } 
+                else if (strcasecmp(Return, st2.title) == 0) 
+                {
+                    if (st2.borrow == 1) {
+                        st2.borrow = 0;
+                        printf("책이 반납 되었습니다\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st2.title, st2.author, st2.press, st2.page, st2.price, st2.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 되지 않은 책입니다\n");
+                    }
+                } 
+                else if (strcasecmp(Return, st3.title) == 0) 
+                {
+                    if (st3.borrow == 1) {
+                        st3.borrow = 0;
+                        printf("책이 반납 되었습니다\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st3.title, st3.author, st3.press, st3.page, st3.price, st3.borrow ? "borrowing" : "available");
+
+                    } 
+                    else {
+                        printf("대출 되지 않은 책입니다\n");
+                    }
+                } 
+                else if (strcasecmp(Return, st4.title) == 0) 
+                {
+                    if (st4.borrow == 1) {
+                        st4.borrow = 0;
+                        printf("책이 반납 되었습니다\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st4.title, st4.author, st4.press, st4.page, st4.price, st4.borrow ? "borrowing" : "available");
+
+                    } 
+                    else {
+                        printf("대출 되지 않은 책입니다\n");
+                    }
+                } 
+                else if (strcasecmp(Return, st5.title) == 0) 
+                {
+                    if (st5.borrow == 1) {
+                        st5.borrow = 0;
+                        printf("책이 반납 되었습니다\n");
+                        printf("%s %s %s %s %s %s\n", "Title", "Authors", "Press", "Page", "Price","borrow");
+                        printf("------------------------------------------------\n");
+                        printf("%s %s %s %d %'d %s\n", st5.title, st5.author, st5.press, st5.page, st5.price, st5.borrow ? "borrowing" : "available");
+                    } 
+                    else {
+                        printf("대출 되지 않은 책입니다\n");
+                    }
+                } 
+                else {
+                    printf("보유하지 않은 도서입니다.\n");
+                }
+                }
+                break;
+            case 5:
+                printf("프로그램을 종료합니다.\n");
+                return 0;
+            default:
+                printf("잘못된 선택입니다. 다시 선택하세요.\n");
+        }
+    }
+    return 0;
+}
